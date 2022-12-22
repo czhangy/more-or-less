@@ -155,4 +155,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgements
 
 -   [Awesome README](https://github.com/matiassingers/awesome-readme)
+-   [balldontlie API](https://www.balldontlie.io/)
+-   [The Higher Lower Game](http://www.higherlowergame.com/)
 -   [Shields.io](https://shields.io/)
+-   [Team Color Codes](https://teamcolorcodes.com/)

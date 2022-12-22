@@ -4,7 +4,7 @@ import styles from "./Footer.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
         <div className={styles.footer}>
             <div className={styles["footer-container"]}>

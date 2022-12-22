@@ -9,13 +9,14 @@
 }
 
 ::-webkit-scrollbar {
-}
-
-::-webkit-scrollbar-track {
+    background: black;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
+    background: white;
     &:hover {
+        background: lightgrey;
     }
 }
 
