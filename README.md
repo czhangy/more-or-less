@@ -2,25 +2,25 @@
 
 <!-- Title -->
 
-<img src="public/assets/images/next.webp" alt="logo" width="200" height="auto" />
-<h1>Next Personal Starter</h1>
+<img src="assets/images/nba.png" alt="logo" width="200" height="auto" />
+<h1>More or Less</h1>
 
 <!-- Badges -->
 
 <p>
     <a href="">
-        <img src="https://img.shields.io/github/last-commit/czhangy/next-personal-starter" alt="last update" />
+        <img src="https://img.shields.io/github/last-commit/czhangy/more-or-less" alt="last update" />
     </a>
-    <a href="https://github.com/czhangy/next-personal-starter/stargazers">
-        <img src="https://img.shields.io/github/stars/czhangy/next-personal-starter" alt="stars" />
+    <a href="https://github.com/czhangy/more-or-less/stargazers">
+        <img src="https://img.shields.io/github/stars/czhangy/more-or-less" alt="stars" />
     </a>
-    <a href="https://github.com/czhangy/next-personal-starter/issues/">
-        <img src="https://img.shields.io/github/issues/czhangy/next-personal-starter" alt="open issues" />
+    <a href="https://github.com/czhangy/more-or-less/issues/">
+        <img src="https://img.shields.io/github/issues/czhangy/more-or-less" alt="open issues" />
 </p>
 <h4>
-    <a href="https://github.com/czhangy/next-personal-starter">Documentation</a>
+    <a href="https://github.com/czhangy/more-or-less">Documentation</a>
     <span> · </span>
-    <a href="https://github.com/czhangy/next-personal-starter/issues">Report Bug</a>
+    <a href="https://github.com/czhangy/more-or-less/issues">Report Bug</a>
 </h4>
 
 </div>
@@ -52,7 +52,73 @@
 
 ### Summary
 
-This is my personal starter for TypeScript/Next.js applications. As of now, it comes pre-setup with a README template, `src` folder, path aliasing, SASS support, Prettier config, Jest/Testing Library, Husky pre-commit hooks, and Prisma config, although other technologies may be added in the future.
+More or less is a game based off of the popular web game Higher or Lower. Instead of guessing Google search frequency, players will guess current NBA player statistics.
+
+The most up-to-date version of More or Less is currently deployed at: [PROJECT_URL].
+
+<!-- Tech Stack -->
+
+### Tech Stack
+
+<!-- Shields.io Badges: https://github.com/Ileriayo/markdown-badges -->
+
+<details>
+    <summary>Client</summary>
+    <br />
+    <a href="https://www.typescriptlang.org/">
+        <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    </a>
+    <a href="https://nextjs.org/">
+        <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="NextJS" />
+    </a>
+    <a href="https://reactjs.org/">
+        <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="ReactJS" />
+    </a>
+    <a href="https://sass-lang.com/">
+        <img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white" alt="SASS" />
+    </a>
+</details>
+
+<details>
+    <summary>Server</summary>
+    <br />
+    <a href="https://www.typescriptlang.org/">
+        <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    </a>
+    <a href="https://nextjs.org/">
+        <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="NextJS" />
+    </a>
+    <a href="https://www.prisma.io/">
+        <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" alt="Prisma" />
+    </a>
+</details>
+
+<details>
+    <summary>Deployment</summary>
+    <br />
+    <a href="https://www.vercel.com/">
+        <img src="https://img.shields.io/badge/-vercel-black?logo=vercel&logoColor=white&style=for-the-badge" alt="Vercel" />
+    </a>
+</details>
+
+<details>
+    <summary>Testing</summary>
+    <br />
+    <a href="https://jestjs.io/">
+        <img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" />
+    </a>
+    <a href="https://testing-library.com/">
+        <img src="https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white" alt="Testing Library" />
+    </a>
+</details>
+
+<!-- Env Variables -->
+
+### Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file
+
+-   `DATABASE_URL`
 
 <!-- Getting Started -->
 
@@ -63,22 +129,6 @@ This is my personal starter for TypeScript/Next.js applications. As of now, it c
 ### Prerequisites
 
 This project uses NPM as a package manager
-
-<!-- Run Locally -->
-
-### Run Locally
-
-Create a Next app with this starter
-
-```bash
-npx create-next-app [project-name] -e https://github.com/czhangy/next-personal-starter
-```
-
-Start the application
-
-```bash
-npm run dev
-```
 
 ## License
 
