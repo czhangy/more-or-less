@@ -1,1 +1,6 @@
 @use "@/styles/constants";
+
+.home {
+    background: blue;
+    height: calc(100vh - #{constants.$navbar-height});
+}

@@ -7,9 +7,9 @@ import styles from "@/styles/Home.module.scss";
 
 const Home: NextPage = () => {
     return (
-        <div id={styles.home}>
+        <div className={styles.home}>
             <Head>
-                <title>Create Next App</title>
+                <title>More or Less</title>
             </Head>
         </div>
     );
