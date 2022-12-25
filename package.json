@@ -7,12 +7,12 @@
         "build": "npx prisma db push --schema=./src/prisma/schema.prisma && next build",
         "start": "next start",
         "lint": "next lint",
-        "db": "npx prisma db push --schema=./src/prisma/schema.prisma && npx prisma studio",
+        "db": "npx prisma db push --schema=./src/prisma/schema.prisma && npx prisma studio --schema=./src/prisma/schema.prisma",
         "test": "jest --coverage --passWithNoTests",
         "prepare": "husky install"
     },
     "dependencies": {
-        "@prisma/client": "^4.0.0",
+        "@prisma/client": "^4.8.0",
         "next": "12.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -26,10 +26,10 @@
         "@types/react-dom": "18.0.5",
         "eslint": "8.19.0",
         "eslint-config-next": "12.2.0",
+        "husky": "^8.0.0",
         "jest": "^28.1.2",
         "jest-environment-jsdom": "^28.1.2",
-        "prisma": "^4.0.0",
-        "typescript": "4.7.4",
-        "husky": "^8.0.0"
+        "prisma": "^4.8.0",
+        "typescript": "4.7.4"
     }
 }
