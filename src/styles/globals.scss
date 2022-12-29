@@ -24,6 +24,7 @@ html,
 body {
     background: black;
     color: white;
+    font-family: constants.$main-font;
     padding: 0;
     margin: 0;
 }
@@ -88,6 +89,10 @@ h6 {
 
 .img {
     position: relative;
+}
+
+.paired-img {
+    margin-right: 0.75rem;
 }
 
 .show {

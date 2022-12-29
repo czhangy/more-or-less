@@ -6,9 +6,9 @@ import Image from "next/image";
 const Navbar: React.FC = () => {
     return (
         <div className={styles.navbar}>
-            <div className={styles["navbar-container"]}>
+            <div className={`${styles["navbar-container"]} center`}>
                 <div className={styles.logo}>
-                    <div className={styles["logo-img"]}>
+                    <div className={`${styles["logo-img"]} img paired-img`}>
                         <Image
                             src="/assets/images/logo.png"
                             alt=""

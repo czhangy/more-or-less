@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         <div className={styles.footer}>
             <div className={`${styles["footer-container"]} center`}>
                 <div className={styles.credits}>
-                    <div className={`${styles.headshot} circle img`}>
+                    <div className={`${styles.headshot} circle img paired-img`}>
                         <Image
                             src="/assets/images/headshot.jpeg"
                             alt="Headshot"

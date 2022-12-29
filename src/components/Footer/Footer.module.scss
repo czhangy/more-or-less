@@ -3,11 +3,9 @@
 .footer {
     --footer-height: 240px;
     --font-size: 1.5rem;
-    --headshot-margin: 0.75rem;
     --headshot-size: 80px;
     --link-size: 30px;
     --link-spacing: 120px;
-    --x-padding: 1.25rem;
     --y-padding: 1.5rem;
 
     height: var(--footer-height);
@@ -18,7 +16,7 @@
         flex-direction: column;
         height: 100%;
         justify-content: space-around;
-        padding: var(--y-padding) var(--x-padding);
+        padding: var(--y-padding) constants.$nav-padding;
 
         .credits {
             align-items: center;
@@ -26,12 +24,10 @@
 
             .headshot {
                 height: var(--headshot-size);
-                margin-right: var(--headshot-margin);
                 width: var(--headshot-size);
             }
 
             .credits-text {
-                font-family: constants.$main-font;
                 font-size: var(--font-size);
             }
         }
@@ -69,7 +65,6 @@
     .footer {
         --footer-height: auto;
         --link-size: 40px;
-        --x-padding: 1.5rem;
         --y-padding: 2.25rem;
 
         .footer-container {
