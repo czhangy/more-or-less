@@ -10,9 +10,10 @@ import PlayerCard from "../PlayerCard/PlayerCard";
 
 type Props = {
     playerNames: string[];
+    onGameOver: (score: number) => void;
 };
 
-const GameScreen: React.FC<Props> = ({ playerNames }: Props) => {
+const GameScreen: React.FC<Props> = ({ playerNames, onGameOver }: Props) => {
     // Stat state
     const [currentStat, setCurrentStat] = useState<string | null>(null);
     // Player states
@@ -20,6 +21,8 @@ const GameScreen: React.FC<Props> = ({ playerNames }: Props) => {
     const [unknownPlayer, setUnknownPlayer] = useState<Player | null>(null);
     // Game state
     const [score, setScore] = useState<number>(0);
+    const [highScore, setHighScore] = useState<number>(0);
+    const [gameStart, setGameStart] = useState<boolean>(false);
 
     // Initialize game
     useEffect(() => {
@@ -43,7 +46,6 @@ const GameScreen: React.FC<Props> = ({ playerNames }: Props) => {
             const response = await axios.get("/api/players", {
                 params: { name: player },
             });
-            console.log(response);
             return response.data;
         } catch (e) {
             console.log(e);
@@ -52,6 +54,11 @@ const GameScreen: React.FC<Props> = ({ playerNames }: Props) => {
 
     // Initialize game
     const initGame = async () => {
+        // Fetch high score from local storage
+        const prevHighScore = localStorage.getItem("highscore");
+        if (prevHighScore) {
+            setHighScore(parseInt(prevHighScore));
+        }
         // Randomly select stat
         const initialStat = generateRandomStat();
         // Randomly select 2 players
@@ -77,29 +84,42 @@ const GameScreen: React.FC<Props> = ({ playerNames }: Props) => {
         setCurrentStat(initialStat);
         setKnownPlayer(player1 as unknown as Player);
         setUnknownPlayer(player2);
+        setGameStart(true);
     };
 
     // Handle guess logic
-    const makeGuess = async (correct: boolean) => {
+    const handleGuess = async (correct: boolean) => {
         if (correct) {
+            // Increment the score
+            if (score + 1 > highScore) {
+                setHighScore(score + 1);
+                localStorage.setItem("highscore", (score + 1).toString());
+            }
             setScore(score + 1);
+            // Change the stat
+            const nextStat = generateRandomStat();
+            // Load next player
+            let nextPlayer: Player | null = null;
+            while (
+                !nextPlayer ||
+                !validatePlayers(nextPlayer, unknownPlayer!, nextStat)
+            ) {
+                const nextName = generateRandomPlayer();
+                nextPlayer = await fetchPlayer(nextName);
+            }
+            setTimeout(() => {
+                setCurrentStat(nextStat);
+                setKnownPlayer(unknownPlayer);
+                setUnknownPlayer(nextPlayer);
+            }, 1500);
+        } else {
+            setTimeout(() => {
+                setGameStart(false);
+            }, 2500);
+            setTimeout(() => {
+                onGameOver(score);
+            }, 4000);
         }
-        // Change the stat
-        const nextStat = generateRandomStat();
-        // Load next player
-        let nextPlayer: Player | null = null;
-        while (
-            !nextPlayer ||
-            !validatePlayers(nextPlayer, unknownPlayer!, nextStat)
-        ) {
-            const nextName = generateRandomPlayer();
-            nextPlayer = await fetchPlayer(nextName);
-        }
-        setTimeout(() => {
-            setCurrentStat(nextStat);
-            setKnownPlayer(unknownPlayer);
-            setUnknownPlayer(nextPlayer);
-        }, 4000);
     };
 
     // Make sure players are valid
@@ -123,10 +143,16 @@ const GameScreen: React.FC<Props> = ({ playerNames }: Props) => {
     };
 
     return (
-        <div className={styles["game-screen"]}>
-            <div className={styles.scores}>
-                <p>HIGH SCORE: {score}</p>
-                <p>SCORE: {score}</p>
+        <div
+            className={`${styles["game-screen"]} ${
+                gameStart ? styles.show : ""
+            }`}
+        >
+            <div className={styles["scores-container"]}>
+                <div className={styles.scores}>
+                    <p>HIGH SCORE: {highScore}</p>
+                    <p>SCORE: {score}</p>
+                </div>
             </div>
             {knownPlayer && unknownPlayer ? (
                 <>
@@ -134,7 +160,7 @@ const GameScreen: React.FC<Props> = ({ playerNames }: Props) => {
                     <PlayerCard
                         player={unknownPlayer}
                         stat={currentStat!}
-                        onGuess={makeGuess}
+                        onGuess={handleGuess}
                         knownPlayer={knownPlayer}
                     />
                 </>

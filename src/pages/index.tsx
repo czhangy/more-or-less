@@ -12,6 +12,7 @@ import prisma from "@/lib/prisma";
 // Components
 import StartScreen from "@/components/StartScreen/StartScreen";
 import GameScreen from "@/components/GameScreen/GameScreen";
+import GameOverScreen from "@/components/GameOverScreen/GameOverScreen";
 
 type Props = {
     playerNames: string[];
@@ -20,10 +21,30 @@ type Props = {
 const Home: NextPage<Props> = ({ playerNames }: Props) => {
     // App state
     const [isStarted, setIsStarted] = useState<boolean>(false);
+    const [isOver, setIsOver] = useState<boolean>(false);
+    const [score, setScore] = useState<number>(0);
 
-    const startGame = () => {
-        // Delay for animation
-        setTimeout(() => setIsStarted(true), 900);
+    const getScreen = () => {
+        if (isOver) {
+            return (
+                <GameOverScreen
+                    score={score}
+                    onRestart={() => setIsOver(false)}
+                />
+            );
+        } else if (isStarted) {
+            return (
+                <GameScreen
+                    playerNames={playerNames}
+                    onGameOver={(score) => {
+                        setScore(score);
+                        setIsOver(true);
+                    }}
+                />
+            );
+        } else {
+            return <StartScreen onStart={() => setIsStarted(true)} />;
+        }
     };
 
     return (
@@ -31,11 +52,7 @@ const Home: NextPage<Props> = ({ playerNames }: Props) => {
             <Head>
                 <title>More or Less</title>
             </Head>
-            {isStarted ? (
-                <GameScreen playerNames={playerNames} />
-            ) : (
-                <StartScreen onStart={startGame} />
-            )}
+            {getScreen()}
         </div>
     );
 };

@@ -78,7 +78,11 @@ const PlayerCard: React.FC<Props> = ({
                             backgroundColor: team.color,
                         }}
                     />
-                    <div className={`${styles["team-logo"]} `}>
+                    <div
+                        className={`${styles["team-logo"]} ${
+                            fadePlayers ? styles.show : ""
+                        }`}
+                    >
                         <Image
                             src={team.logo}
                             alt=""
@@ -123,6 +127,7 @@ const PlayerCard: React.FC<Props> = ({
                                     <button
                                         className={styles["guess-button"]}
                                         onClick={() => checkGuess(true)}
+                                        disabled={fadeButtons}
                                     >
                                         MORE
                                     </button>
@@ -130,6 +135,7 @@ const PlayerCard: React.FC<Props> = ({
                                     <button
                                         className={styles["guess-button"]}
                                         onClick={() => checkGuess(false)}
+                                        disabled={fadeButtons}
                                     >
                                         LESS
                                     </button>

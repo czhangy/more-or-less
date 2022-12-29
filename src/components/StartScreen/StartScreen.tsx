@@ -13,7 +13,7 @@ const StartScreen: React.FC<Props> = ({ onStart }) => {
         document
             .getElementById("start-button")!
             .classList.add(styles["button-fade-out"]);
-        onStart();
+        setTimeout(() => onStart(), 900);
     };
 
     return (
