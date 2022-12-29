@@ -3,7 +3,7 @@
 .guess-buttons {
     --button-margin: 0.5rem;
     --button-radius: 5px;
-    --button-width: 6rem;
+    --button-width: 4rem;
     --fade-out-time: 0.2s;
 
     align-items: center;
@@ -24,6 +24,6 @@
 @media screen and (min-width: constants.$desktop) {
     .guess-buttons {
         --button-margin: 1rem;
-        --button-width: 10rem;
+        --button-width: 8rem;
     }
 }

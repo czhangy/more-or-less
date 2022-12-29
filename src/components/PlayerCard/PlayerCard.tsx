@@ -29,28 +29,43 @@ const PlayerCard: React.FC<Props> = ({
     const [team, setTeam] = useState<Team | null>(null);
 
     // Card state
-    const [fadePlayers, setFadePlayers] = useState<boolean>(false);
+    const [fadePlayers, setFadePlayers] = useState<boolean>(true);
     const [fadeButtons, setFadeButtons] = useState<boolean>(false);
     const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
     const [currentStat, setCurrentStat] = useState<string>("");
 
-    // Initialize card
+    // Component typing
+    const isKnownCard: boolean = onGuess === undefined;
+
+    // Swap player on card
     useEffect(() => {
-        setFadePlayers(false);
+        // Fade players out of frame
+        setFadePlayers(true);
+        // Resets fade container to buttons, delay to prevent visible change
         setTimeout(() => {
             setFadeButtons(false);
         }, 1000);
+        // Sets player info once data is not visible
         setTimeout(() => {
             setTeam(getTeamData(player.team));
             setCurrentPlayer(player);
             setCurrentStat(stat);
-            setFadePlayers(true);
+            setFadePlayers(false);
         }, 1500);
     }, [player]);
 
+    // Get a player's stat and format it
+    const getStat = () => {
+        return (currentPlayer![currentStat as keyof Player] as number).toFixed(
+            1
+        );
+    };
+
     // Check to see if guess was correct
     const checkGuess = (guess: boolean) => {
+        // Fades buttons to reveal answer
         setFadeButtons(true);
+        // Check averages
         let correct: boolean;
         if (guess) {
             correct =
@@ -61,6 +76,7 @@ const PlayerCard: React.FC<Props> = ({
                 currentPlayer![currentStat as keyof Player] <
                 knownPlayer![currentStat as keyof Player];
         }
+        // Call back to game screen for logic
         onGuess!(correct);
     };
 
@@ -69,7 +85,7 @@ const PlayerCard: React.FC<Props> = ({
             {currentPlayer && team ? (
                 <div
                     className={`${styles["player-card"]} ${
-                        onGuess === undefined
+                        isKnownCard
                             ? styles["known-card"]
                             : styles["unknown-card"]
                     }`}
@@ -82,74 +98,59 @@ const PlayerCard: React.FC<Props> = ({
                     />
                     <div
                         className={`${styles["team-logo"]} ${
-                            fadePlayers ? styles.show : ""
+                            fadePlayers ? "hide" : styles["show-logo"]
                         }`}
                     >
                         <Image
                             src={team.logo}
-                            alt=""
+                            alt={`${player.team} logo`}
                             layout="fill"
                             objectFit="cover"
                         />
                     </div>
-                    {!onGuess ? (
+                    {isKnownCard ? (
                         <div
                             className={`${styles["card-text-container"]} ${
-                                fadePlayers ? styles.show : ""
+                                fadePlayers ? "hide" : "show"
                             }`}
                         >
-                            <strong className={styles["card-text"]}>
-                                {currentPlayer.name}
-                            </strong>
-                            <p className={styles["card-text"]}>AVERAGES</p>
-                            <p className={styles["card-text"]}>
-                                {`${(
-                                    currentPlayer[
-                                        currentStat as keyof Player
-                                    ] as number
-                                ).toFixed(1)} ${currentStat}`}
-                            </p>
+                            <strong>{currentPlayer.name}</strong>
+                            <p>AVERAGES</p>
+                            <strong className={styles.stat}>{getStat()}</strong>
+                            <p>{currentStat}</p>
                         </div>
                     ) : (
                         <div
                             className={`${styles["card-text-container"]} ${
-                                fadePlayers ? styles.show : ""
+                                fadePlayers ? "hide" : "show"
                             }`}
                         >
-                            <strong className={styles["card-text"]}>
-                                {currentPlayer.name}
-                            </strong>
-                            <p className={styles["card-text"]}>AVERAGES</p>
+                            <strong>{currentPlayer.name}</strong>
+                            <p>AVERAGES</p>
                             <div className={styles["fade-container"]}>
                                 <GuessButtons
                                     fade={fadeButtons}
                                     onGuess={checkGuess}
                                 />
                                 <strong
-                                    className={`${styles.answer} ${
-                                        fadeButtons
-                                            ? styles["appear-right"]
-                                            : ""
+                                    className={`${styles.stat} ${
+                                        fadeButtons ? "show" : "hide"
                                     }`}
                                 >
-                                    {(
-                                        currentPlayer[
-                                            currentStat as keyof Player
-                                        ] as number
-                                    ).toFixed(1)}
+                                    {getStat()}
                                 </strong>
                             </div>
-                            <p className={styles["card-text"]}>{currentStat}</p>
+                            <p>{currentStat}</p>
                         </div>
                     )}
                     <div
                         className={`${styles["player-headshot"]} ${
-                            fadePlayers ? styles.show : ""
+                            fadePlayers ? "hide" : "show"
                         }`}
                     >
                         <Image
                             src={currentPlayer.headshot}
-                            alt=""
+                            alt={currentPlayer.name}
                             layout="fill"
                             objectFit="contain"
                         />

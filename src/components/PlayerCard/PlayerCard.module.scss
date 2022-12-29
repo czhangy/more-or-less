@@ -1,8 +1,23 @@
 @use "@/styles/constants";
 
 .player-card {
+    --bg-opacity: 0.8;
+    --border-style: solid white;
+    --border-width: 1px;
+    --button-z: 9;
+    --fade-time: 0.5s;
+    --font-size: 0.9rem;
+    --headshot-height: 190px;
+    --headshot-pos: -50px;
+    --headshot-width: 270px;
+    --logo-opacity: 0.3;
+    --logo-pos: -200px;
+    --logo-size: 400px;
+    --text-pos: 50px;
+
     align-items: center;
     display: flex;
+    font-size: var(--font-size);
     height: 50%;
     justify-content: center;
     overflow: hidden;
@@ -11,89 +26,82 @@
 
     .card-bg {
         height: 100%;
-        opacity: 0.8;
+        opacity: var(--bg-opacity);
         position: absolute;
-        transition: background-color 1s ease;
+        transition: background-color var(--fade-time);
         width: 100%;
     }
 
     .team-logo {
-        height: 400px;
-        opacity: 0;
+        height: var(--logo-size);
         position: absolute;
-        transition: transform 0.5s, opacity 0.5s;
-        width: 400px;
+        transition: transform var(--fade-time), opacity var(--fade-time);
+        width: var(--logo-size);
+    }
+
+    .show-logo {
+        opacity: var(--logo-opacity) !important;
+        transform: translateX(0) !important;
     }
 
     .card-text-container {
         align-items: center;
         display: flex;
-        font-size: 1.5rem;
         flex-direction: column;
-        opacity: 0;
         position: absolute;
-        transition: all 0.5s ease;
-        z-index: 2;
+        text-transform: uppercase;
+        transition: opacity var(--fade-time), transform var(--fade-time);
+        z-index: var(--button-z);
 
-        .card-text {
-            font-family: constants.$main-font;
-            text-transform: uppercase;
+        .stat {
+            font-size: 3rem;
+            letter-spacing: 2px;
         }
     }
 
     .player-headshot {
-        bottom: 1px;
-        height: 190px;
-        opacity: 0;
+        height: var(--headshot-height);
         position: absolute;
-        transition: transform 0.5s, opacity 0.5s;
-        width: 270px;
+        transition: transform var(--fade-time), opacity var(--fade-time);
+        width: var(--headshot-width);
     }
 }
 
 .known-card {
     .card-bg {
-        border-bottom: 2px solid white;
+        border-bottom: var(--border-width) var(--border-style);
     }
 
     .team-logo {
-        left: -200px;
-        transform: translateX(-70px);
+        left: var(--logo-pos);
+        transform: translateX(-(constants.$translate-dist));
     }
 
     .card-text-container {
-        transform: translateX(100px);
-        right: 50px;
+        transform: translateX(constants.$translate-dist);
+        right: var(--text-pos);
     }
 
     .player-headshot {
-        left: -50px;
-        transform: translateX(-100px);
-    }
-
-    .show {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    .team-logo.show {
-        opacity: 0.3;
+        bottom: var(--border-width);
+        left: var(--headshot-pos);
+        transform: translateX(-(constants.$translate-dist));
     }
 }
 
 .unknown-card {
     .card-bg {
-        border-top: 1px solid white;
+        border-top: var(--border-width) var(--border-style);
     }
 
     .team-logo {
-        transform: translateX(70px);
-        right: -200px;
+        transform: translateX(constants.$translate-dist);
+        right: var(--logo-pos);
     }
 
     .card-text-container {
-        left: 50px;
-        transform: translateX(-100px);
+        left: var(--text-pos);
+        transform: translateX(-(constants.$translate-dist));
 
         .fade-container {
             align-items: center;
@@ -101,127 +109,64 @@
             justify-content: center;
             position: relative;
 
-            .answer {
-                font-family: constants.$main-font;
-                font-size: 3rem;
-                letter-spacing: 2px;
-                opacity: 0;
+            .stat {
                 position: absolute;
-                transform: translate(50px);
-                transition: all 0.5s ease;
-            }
-
-            .fade-left {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            .appear-right {
-                opacity: 1;
-                transform: translateX(0);
+                transform: translate(constants.$translate-dist);
+                transition: opacity var(--fade-time), transform var(--fade-time);
             }
         }
     }
 
     .player-headshot {
-        right: -50px;
-        transform: translateX(100px);
-    }
-
-    .show {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    .team-logo.show {
-        opacity: 0.3;
+        bottom: 0;
+        right: var(--headshot-pos);
+        transform: translateX(constants.$translate-dist);
     }
 }
 
 // Tablet view
 @media screen and (min-width: constants.$tablet) {
     .player-card {
+        --headshot-height: 28vw;
+        --headshot-width: 40vw;
+        --logo-pos: -100px;
+        --logo-size: 50vw;
+
         height: 100%;
         width: 50%;
 
-        .team-logo {
-            height: 50vw;
-            width: 50vw;
-        }
-
         .player-headshot {
             bottom: 0;
-            height: 28vw;
-            width: 40vw;
         }
     }
 
     .known-card {
         .card-bg {
             border-bottom: none;
-            border-right: 1px solid white;
-        }
-
-        .team-logo {
-            left: -100px;
-            transform: translateX(-70px);
+            border-right: var(--border-width) var(--border-style);
         }
 
         .card-text-container {
-            transform: translateX(-100px);
-            right: 50px;
-        }
-
-        .player-headshot {
-            left: -50px;
-            transform: translateX(-100px);
-        }
-
-        .show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .team-logo.show {
-            opacity: 0.3;
+            transform: translateX(-(constants.$translate-dist));
         }
     }
 
     .unknown-card {
         .card-bg {
             border-top: none;
-            border-left: 1px solid white;
-        }
-
-        .team-logo {
-            right: -100px;
-            transform: translateX(70px);
+            border-left: var(--border-width) var(--border-style);
         }
 
         .card-text-container {
-            transform: translateX(100px);
-            left: 50px;
-        }
-
-        .player-headshot {
-            right: -50px;
-            transform: translateX(100px);
-        }
-
-        .show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .team-logo.show {
-            opacity: 0.3;
+            transform: translateX(constants.$translate-dist);
         }
     }
 }
 
 // Desktop view
 @media screen and (min-width: constants.$desktop) {
-    .player-card > .card-text-container {
-        font-size: 2.5rem;
+    .player-card {
+        --font-size: 2rem;
+        --text-pos: 100px;
     }
 }
