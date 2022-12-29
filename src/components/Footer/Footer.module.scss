@@ -1,8 +1,16 @@
 @use "@/styles/constants";
 
 .footer {
-    background: black;
-    height: 240px;
+    --footer-height: 240px;
+    --font-size: 1.5rem;
+    --headshot-margin: 0.75rem;
+    --headshot-size: 80px;
+    --link-size: 30px;
+    --link-spacing: 120px;
+    --x-padding: 1.25rem;
+    --y-padding: 1.5rem;
+
+    height: var(--footer-height);
 
     .footer-container {
         align-items: center;
@@ -10,70 +18,64 @@
         flex-direction: column;
         height: 100%;
         justify-content: space-around;
-        padding: 20px 24px;
+        padding: var(--y-padding) var(--x-padding);
 
         .credits {
             align-items: center;
             display: flex;
 
             .headshot {
-                border-radius: 50%;
-                height: 80px;
-                margin-right: 12px;
-                overflow: hidden;
-                position: relative;
-                width: 80px;
+                height: var(--headshot-size);
+                margin-right: var(--headshot-margin);
+                width: var(--headshot-size);
             }
 
             .credits-text {
-                color: white;
                 font-family: constants.$main-font;
-                font-size: 1.2rem;
-                letter-spacing: 1px;
+                font-size: var(--font-size);
             }
         }
 
         .links {
             display: flex;
             justify-content: space-between;
-            width: 120px;
+            width: var(--link-spacing);
 
             .link {
                 filter: constants.$svg;
-                height: 30px;
-                width: 30px;
-                position: relative;
-                transition: transform 0.2s ease;
+                height: var(--link-size);
+                width: var(--link-size);
             }
         }
     }
 }
 
 @media (hover: hover) {
-    .footer > .footer-container > .links > .link:hover {
-        transform: scale(1.1);
+    .footer {
+        --scale-amnt: 1.1;
+        --scale-time: 0.2s;
+
+        .footer-container > .links > .link {
+            transition: transform var(--scale-time);
+
+            &:hover {
+                transform: scale(var(--scale-amnt));
+            }
+        }
     }
 }
 
 @media screen and (min-width: constants.$desktop) {
     .footer {
-        height: auto;
+        --footer-height: auto;
+        --link-size: 40px;
+        --x-padding: 1.5rem;
+        --y-padding: 2.25rem;
 
         .footer-container {
             flex-direction: row;
             justify-content: space-between;
-            margin: 0 auto;
             max-width: constants.$max-width;
-            padding: 36px 24px;
-
-            .credits > .credits-text {
-                font-size: 1.5rem;
-            }
-
-            .links .link {
-                height: 40px;
-                width: 40px;
-            }
         }
     }
 }
