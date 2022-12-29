@@ -25,6 +25,7 @@ body {
     background: black;
     color: white;
     font-family: constants.$main-font;
+    font-size: 24px;
     padding: 0;
     margin: 0;
 }
@@ -71,6 +72,7 @@ h4,
 h5,
 h6 {
     margin: 0;
+    font-size: inherit;
     font-weight: normal;
 }
 
@@ -92,7 +94,14 @@ h6 {
 }
 
 .paired-img {
-    margin-right: 0.75rem;
+    margin-right: 0.5rem;
+}
+
+.pill-button {
+    border-radius: 100px;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
 }
 
 .show {
@@ -105,5 +114,12 @@ h6 {
     button:hover {
         background: transparent;
         color: white;
+    }
+}
+
+// Tablet view
+@media screen and (min-width: constants.$tablet) {
+    .pill-button {
+        margin-top: 3rem;
     }
 }

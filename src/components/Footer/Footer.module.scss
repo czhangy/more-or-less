@@ -1,12 +1,11 @@
 @use "@/styles/constants";
 
 .footer {
-    --footer-height: 240px;
-    --font-size: 1.5rem;
+    --footer-height: 10rem;
     --headshot-size: 80px;
     --link-size: 30px;
     --link-spacing: 120px;
-    --y-padding: 1.5rem;
+    --y-padding: 2rem;
 
     height: var(--footer-height);
 
@@ -15,7 +14,7 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        justify-content: space-around;
+        justify-content: space-between;
         padding: var(--y-padding) constants.$nav-padding;
 
         .credits {
@@ -65,11 +64,10 @@
     .footer {
         --footer-height: auto;
         --link-size: 40px;
-        --y-padding: 2.25rem;
+        --y-padding: 1.5rem;
 
         .footer-container {
             flex-direction: row;
-            justify-content: space-between;
             max-width: constants.$max-width;
         }
     }

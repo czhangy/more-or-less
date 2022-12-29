@@ -1,49 +1,20 @@
 @use "@/styles/constants";
 
 .start-screen {
+    --fade-time: 1s;
+
     align-items: center;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 1s, transform 1s;
-
-    .welcome-text {
-        color: white;
-        font-family: constants.$main-font;
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .start-button {
-        background: white;
-        border: 2px solid white;
-        border-radius: 100px;
-        font-family: constants.$main-font;
-        font-size: 1.5rem;
-        padding: 1rem 3rem;
-    }
-}
-
-.show {
-    opacity: 1;
-    transform: translateY(0px);
-}
-
-// Sticky hover
-@media (hover: hover) {
-    .start-screen > .start-button:hover {
-        background: transparent;
-        color: white;
-    }
+    transform: translateY(-(constants.$translate-dist));
+    transition: opacity var(--fade-time), transform var(--fade-time);
 }
 
 // Responsiveness
 @media screen and (min-width: constants.$tablet) {
-    .start-screen > .welcome-text {
-        font-size: 3rem;
-        margin-bottom: 4rem;
+    .start-screen {
+        font-size: 2rem;
     }
 }

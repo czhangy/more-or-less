@@ -25,17 +25,11 @@ const StartScreen: React.FC<Props> = ({ onStart }) => {
     return (
         <div
             className={`${styles["start-screen"]} ${
-                isLoaded ? styles.show : ""
+                isLoaded ? "show" : "hide"
             }`}
         >
-            <div id="welcome-text" className={styles["welcome-text"]}>
-                How well do you know NBA stats?
-            </div>
-            <button
-                id="start-button"
-                className={styles["start-button"]}
-                onClick={handleClick}
-            >
+            <h3>How well do you know NBA stats?</h3>
+            <button className="pill-button" onClick={handleClick}>
                 START!
             </button>
         </div>
