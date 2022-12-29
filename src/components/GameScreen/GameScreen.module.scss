@@ -1,49 +1,21 @@
 @use "@/styles/constants";
 
 .game-screen {
+    --fade-time: 0.5s;
+
     align-items: center;
     background: black;
-    color: white;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    opacity: 0;
     position: relative;
-    transition: opacity 0.5s;
-
-    .scores-container {
-        background: rgba(0, 0, 0, 0.3);
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 9;
-
-        .scores {
-            display: flex;
-            font-family: constants.$main-font;
-            justify-content: space-between;
-            margin: 0 auto;
-            max-width: constants.$max-width;
-            padding: 0.5rem;
-        }
-    }
-}
-
-.show {
-    opacity: 1;
+    transition: var(--fade-time);
 }
 
 // Tablet view
 @media screen and (min-width: constants.$tablet) {
     .game-screen {
         flex-direction: row;
-    }
-}
-
-// Desktop view
-@media screen and (min-width: constants.$desktop) {
-    .scores-container > .scores {
-        font-size: 1.5rem;
     }
 }

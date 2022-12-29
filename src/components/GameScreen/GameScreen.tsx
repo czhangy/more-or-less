@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import Player from "@/models/Player";
 // API
 import axios from "axios";
-import PlayerCard from "../PlayerCard/PlayerCard";
+// Components
+import PlayerCard from "@/components/PlayerCard/PlayerCard";
+import ScoreBar from "@/components/ScoreBar/ScoreBar";
 
 type Props = {
     playerNames: string[];
@@ -52,6 +54,19 @@ const GameScreen: React.FC<Props> = ({ playerNames, onGameOver }: Props) => {
         }
     };
 
+    // Get a valid unknown player
+    const fetchUnknownPlayer = async (knownPlayer: Player, stat: string) => {
+        let unknownPlayer: Player | null = null;
+        while (
+            !unknownPlayer ||
+            !validatePlayers(knownPlayer, unknownPlayer, stat)
+        ) {
+            const unknownName = generateRandomPlayer();
+            unknownPlayer = await fetchPlayer(unknownName);
+        }
+        return unknownPlayer;
+    };
+
     // Initialize game
     const initGame = async () => {
         // Fetch high score from local storage
@@ -61,68 +76,54 @@ const GameScreen: React.FC<Props> = ({ playerNames, onGameOver }: Props) => {
         }
         // Randomly select stat
         const initialStat = generateRandomStat();
-        // Randomly select 2 players
-        const knownName: string = generateRandomPlayer();
-        let unknownName: string = generateRandomPlayer();
-        // Fetch players from DB
-        let player1, player2;
-        const knownPromise = fetchPlayer(knownName).then(
-            (data: Player) => (player1 = data)
-        );
-        const unknownPromise = fetchPlayer(unknownName).then(
-            (data: Player) => (player2 = data)
-        );
-        await Promise.all([knownPromise, unknownPromise]);
-        // Reset until players are valid
-        while (
-            !validatePlayers(player1 as unknown as Player, player2, initialStat)
-        ) {
-            unknownName = generateRandomPlayer();
-            player2 = await fetchPlayer(unknownName);
-        }
-        // Set state
         setCurrentStat(initialStat);
-        setKnownPlayer(player1 as unknown as Player);
+        // Fetch initial known player
+        const knownName: string = generateRandomPlayer();
+        const player1: Player = await fetchPlayer(knownName);
+        setKnownPlayer(player1);
+        // Fetch initial unknown player until valid
+        const player2: Player = await fetchUnknownPlayer(player1, initialStat);
         setUnknownPlayer(player2);
+        // Set game state
         setGameStart(true);
     };
 
     // Handle guess logic
     const handleGuess = async (correct: boolean) => {
         if (correct) {
-            // Increment the score
-            if (score + 1 > highScore) {
+            // Increment the score and save if high score
+            const newScore: number = score + 1;
+            if (newScore > highScore) {
                 setHighScore(score + 1);
-                localStorage.setItem("highscore", (score + 1).toString());
+                localStorage.setItem("highscore", newScore.toString());
             }
-            setScore(score + 1);
-            // Change the stat
-            const nextStat = generateRandomStat();
+            setScore(newScore);
+            // Randomize the stat
+            const nextStat: string = generateRandomStat();
             // Load next player
-            let nextPlayer: Player | null = null;
-            while (
-                !nextPlayer ||
-                !validatePlayers(nextPlayer, unknownPlayer!, nextStat)
-            ) {
-                const nextName = generateRandomPlayer();
-                nextPlayer = await fetchPlayer(nextName);
-            }
+            const nextPlayer: Player = await fetchUnknownPlayer(
+                unknownPlayer as Player,
+                nextStat
+            );
+            // Delay to show stat before moving to next player
             setTimeout(() => {
                 setCurrentStat(nextStat);
                 setKnownPlayer(unknownPlayer);
                 setUnknownPlayer(nextPlayer);
             }, 1500);
         } else {
+            // Delay to show stat before fading out
             setTimeout(() => {
                 setGameStart(false);
             }, 2500);
+            // Delay to complete fade out before showing game over screen
             setTimeout(() => {
                 onGameOver(score);
             }, 4000);
         }
     };
 
-    // Make sure players are valid
+    // Make sure players are valid to compare
     const validatePlayers = (
         player1: Player,
         player2: Player,
@@ -145,15 +146,10 @@ const GameScreen: React.FC<Props> = ({ playerNames, onGameOver }: Props) => {
     return (
         <div
             className={`${styles["game-screen"]} ${
-                gameStart ? styles.show : ""
+                gameStart ? "show" : "hide"
             }`}
         >
-            <div className={styles["scores-container"]}>
-                <div className={styles.scores}>
-                    <p>HIGH SCORE: {highScore}</p>
-                    <p>SCORE: {score}</p>
-                </div>
-            </div>
+            <ScoreBar score={score} highScore={highScore} />
             {knownPlayer && unknownPlayer ? (
                 <>
                     <PlayerCard player={knownPlayer} stat={currentStat!} />

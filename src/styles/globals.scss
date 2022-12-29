@@ -8,7 +8,6 @@
 }
 
 ::-webkit-scrollbar {
-    background: black;
     width: 10px;
 }
 
@@ -43,10 +42,6 @@ p {
     margin: 0;
 }
 
-hr {
-    border: none;
-}
-
 button {
     background: white;
     border: 2px solid white;
@@ -54,15 +49,6 @@ button {
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
-}
-
-input,
-textarea {
-    border: none;
-
-    &:focus {
-        outline: none;
-    }
 }
 
 h1,

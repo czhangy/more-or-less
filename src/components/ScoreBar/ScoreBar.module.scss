@@ -1,0 +1,29 @@
+@use "@/styles/constants";
+
+.score-bar {
+    --bar-z: 99;
+    --bg-opacity: 0.3;
+    --font-size: 0.75rem;
+    --y-padding: 0.5rem;
+
+    background: rgba(0, 0, 0, var(--bg-opacity));
+    font-size: var(--font-size);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: var(--bar-z);
+
+    .scores {
+        display: flex;
+        justify-content: space-between;
+        max-width: constants.$max-width;
+        padding: 0.5rem constants.$nav-padding;
+    }
+}
+
+// Tablet view
+@media screen and (min-width: constants.$tablet) {
+    .score-bar {
+        --font-size: inherit;
+    }
+}
