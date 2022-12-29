@@ -1,15 +1,24 @@
 // TS
 import type { NextPage } from "next";
+import Player from "@/models/Player";
 // Next
 import Head from "next/head";
-// Stylesheet
-import styles from "@/styles/Home.module.scss";
 // React
 import { useState } from "react";
+// Stylesheet
+import styles from "@/styles/Home.module.scss";
+// DB
+import prisma from "@/lib/prisma";
 // Components
 import StartScreen from "@/components/StartScreen/StartScreen";
+import GameScreen from "@/components/GameScreen/GameScreen";
 
-const Home: NextPage = () => {
+type Props = {
+    playerNames: string[];
+};
+
+const Home: NextPage<Props> = ({ playerNames }: Props) => {
+    // App state
     const [isStarted, setIsStarted] = useState<boolean>(false);
 
     const startGame = () => {
@@ -22,9 +31,32 @@ const Home: NextPage = () => {
             <Head>
                 <title>More or Less</title>
             </Head>
-            {isStarted ? "" : <StartScreen onStart={startGame} />}
+            {isStarted ? (
+                <GameScreen playerNames={playerNames} />
+            ) : (
+                <StartScreen onStart={startGame} />
+            )}
         </div>
     );
 };
+
+export async function getStaticProps() {
+    try {
+        const response: { name: string }[] = await prisma.player.findMany({
+            select: {
+                name: true,
+            },
+        });
+        const playerNames: string[] = response.map((p) => p.name);
+        return {
+            props: { playerNames },
+        };
+    } catch (e) {
+        console.log(e);
+        return {
+            props: {},
+        };
+    }
+}
 
 export default Home;

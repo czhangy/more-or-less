@@ -23,10 +23,3 @@ model Player {
     bpg          Float
     spg          Float
 }
-
-model Team {
-    id    String @id @default(cuid())
-    tag   String
-    color String
-    logo  String
-}

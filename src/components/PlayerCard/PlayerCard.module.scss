@@ -1,0 +1,148 @@
+@use "@/styles/constants";
+
+.player-card {
+    align-items: center;
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    .card-bg {
+        height: 100%;
+        opacity: 0.8;
+        position: absolute;
+        transition: background-color 1s ease;
+        width: 100%;
+    }
+
+    .team-logo {
+        height: 400px;
+        opacity: 0.3;
+        position: absolute;
+        width: 400px;
+    }
+
+    .card-text-container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        position: absolute;
+        transition: all 0.5s ease;
+
+        .card-text {
+            font-family: constants.$main-font;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+    }
+
+    .player-headshot {
+        bottom: 0;
+        height: 195px;
+        opacity: 0;
+        position: absolute;
+        transition: all 0.5s ease;
+        width: 270px;
+    }
+}
+
+.known-card {
+    .team-logo {
+        left: -200px;
+    }
+
+    .card-text-container {
+        transform: translateX(100px);
+        right: 50px;
+    }
+
+    .player-headshot {
+        left: -50px;
+        transform: translateX(-100px);
+    }
+
+    .show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.unknown-card {
+    .team-logo {
+        right: -200px;
+    }
+
+    .card-text-container {
+        left: 50px;
+        transform: translateX(-100px);
+
+        .fade-container {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            position: relative;
+
+            .guess-buttons {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                transition: all 0.5s ease;
+
+                .guess-button {
+                    background: white;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    font-family: constants.$main-font;
+                    font-size: 1.5rem;
+                    margin: 0.5rem 0;
+                    width: 6rem;
+                }
+            }
+
+            .answer {
+                font-family: constants.$main-font;
+                font-size: 3rem;
+                letter-spacing: 2px;
+                opacity: 0;
+                position: absolute;
+                transform: translate(50px);
+                transition: all 0.5s ease;
+            }
+
+            .fade-left {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            .appear-right {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
+
+    .player-headshot {
+        right: -50px;
+        transform: translateX(100px);
+    }
+
+    .show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+// Sticky hover
+@media (hover: hover) {
+    .unknown-card
+        > .card-text-container
+        > .fade-container
+        > .guess-buttons
+        > .guess-button:hover {
+        background: transparent;
+        color: white;
+    }
+}

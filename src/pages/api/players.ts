@@ -4,6 +4,27 @@ import prisma from "@/lib/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 import Player from "@/models/Player";
 
+const getPlayerByName = async (name: string) => {
+    const response = await prisma.player.findUnique({
+        where: {
+            name: name,
+        },
+        select: {
+            name: true,
+            team: true,
+            headshot: true,
+            recentSeason: true,
+            mpg: true,
+            ppg: true,
+            rpg: true,
+            apg: true,
+            bpg: true,
+            spg: true,
+        },
+    });
+    return response;
+};
+
 const updatePlayer = async (player: Player) => {
     const response = await prisma.player.upsert({
         where: {
@@ -40,7 +61,15 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    if (req.method === "PUT") {
+    if (req.method === "GET") {
+        try {
+            const response = await getPlayerByName(req.query.name as string);
+            res.json(response);
+        } catch (e) {
+            console.log(e);
+            res.status(400).send({ success: false, message: e });
+        }
+    } else if (req.method === "PUT") {
         try {
             const response = updatePlayer(JSON.parse(req.body.player));
             res.json(response);
