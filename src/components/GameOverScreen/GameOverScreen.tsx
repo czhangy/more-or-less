@@ -1,5 +1,7 @@
 // React
 import { useEffect, useState } from "react";
+// Next
+import Image from "next/image";
 
 type Props = {
     score: number;
@@ -26,7 +28,15 @@ const GameOverScreen: React.FC<Props> = ({ score, onRestart }: Props) => {
             <strong>FINAL SCORE: {score}</strong>
             <p>Run it back?</p>
             <button className="pill-button" onClick={handleClick}>
-                RESTART!
+                <div className="game-icon img">
+                    <Image
+                        src="/assets/icons/restart.svg"
+                        alt="Restart icon"
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </div>
+                <p>RESTART</p>
             </button>
         </div>
     );

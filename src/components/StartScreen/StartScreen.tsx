@@ -1,5 +1,7 @@
 // React
 import { useEffect, useState } from "react";
+// Next
+import Image from "next/image";
 
 type Props = {
     onStart: () => void;
@@ -22,9 +24,17 @@ const StartScreen: React.FC<Props> = ({ onStart }) => {
 
     return (
         <div className={`trigger-screen ${isLoaded ? "show" : "hide"}`}>
-            <h3>How well do you know NBA stats?</h3>
+            <h3>Think you're a true NBA stathead?</h3>
             <button className="pill-button" onClick={handleClick}>
-                START!
+                <div className="game-icon img">
+                    <Image
+                        src="/assets/icons/start.svg"
+                        alt="Restart icon"
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </div>
+                <p>START!</p>
             </button>
         </div>
     );

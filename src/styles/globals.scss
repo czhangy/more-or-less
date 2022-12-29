@@ -84,10 +84,18 @@ h6 {
 }
 
 .pill-button {
+    align-items: center;
     border-radius: 100px;
+    display: flex;
     font-size: 1rem;
     margin-top: 1.5rem;
     padding: 0.75rem 2rem;
+
+    .game-icon {
+        height: 24px;
+        margin-right: 0.5rem;
+        width: 24px;
+    }
 }
 
 .trigger-screen {
@@ -117,6 +125,11 @@ h6 {
     button:hover {
         background: transparent;
         color: white;
+    }
+
+    .pill-button:hover > .game-icon {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg)
+            brightness(103%) contrast(101%);
     }
 }
 
