@@ -1,5 +1,3 @@
-// Stylesheet
-import styles from "./StartScreen.module.scss";
 // React
 import { useEffect, useState } from "react";
 
@@ -23,11 +21,7 @@ const StartScreen: React.FC<Props> = ({ onStart }) => {
     };
 
     return (
-        <div
-            className={`${styles["start-screen"]} ${
-                isLoaded ? "show" : "hide"
-            }`}
-        >
+        <div className={`trigger-screen ${isLoaded ? "show" : "hide"}`}>
             <h3>How well do you know NBA stats?</h3>
             <button className="pill-button" onClick={handleClick}>
                 START!

@@ -1,5 +1,3 @@
-// Stylesheet
-import styles from "./GameOverScreen.module.scss";
 // React
 import { useEffect, useState } from "react";
 
@@ -24,14 +22,10 @@ const GameOverScreen: React.FC<Props> = ({ score, onRestart }: Props) => {
     };
 
     return (
-        <div
-            className={`${styles["game-over-screen"]} ${
-                isLoaded ? styles.show : ""
-            }`}
-        >
-            <strong className={styles["game-over-text"]}>SCORE: {score}</strong>
-            <p className={styles["game-over-text"]}>Run it back?</p>
-            <button className={styles["restart-button"]} onClick={handleClick}>
+        <div className={`trigger-screen ${isLoaded ? "show" : "hide"}`}>
+            <strong>FINAL SCORE: {score}</strong>
+            <p>Run it back?</p>
+            <button className="pill-button" onClick={handleClick}>
                 RESTART!
             </button>
         </div>
