@@ -28,6 +28,7 @@
     .card-text-container {
         align-items: center;
         display: flex;
+        font-size: 1.5rem;
         flex-direction: column;
         opacity: 0;
         position: absolute;
@@ -36,7 +37,6 @@
 
         .card-text {
             font-family: constants.$main-font;
-            font-size: 1.5rem;
             text-transform: uppercase;
         }
     }
@@ -101,23 +101,6 @@
             justify-content: center;
             position: relative;
 
-            .guess-buttons {
-                align-items: center;
-                display: flex;
-                flex-direction: column;
-                transition: all 0.5s ease;
-
-                .guess-button {
-                    background: white;
-                    border: 2px solid white;
-                    border-radius: 5px;
-                    font-family: constants.$main-font;
-                    font-size: 1.5rem;
-                    margin: 0.5rem 0;
-                    width: 6rem;
-                }
-            }
-
             .answer {
                 font-family: constants.$main-font;
                 font-size: 3rem;
@@ -152,18 +135,6 @@
 
     .team-logo.show {
         opacity: 0.3;
-    }
-}
-
-// Sticky hover
-@media (hover: hover) {
-    .unknown-card
-        > .card-text-container
-        > .fade-container
-        > .guess-buttons
-        > .guess-button:hover {
-        background: transparent;
-        color: white;
     }
 }
 
@@ -250,17 +221,7 @@
 
 // Desktop view
 @media screen and (min-width: constants.$desktop) {
-    .player-card > .card-text-container .card-text {
+    .player-card > .card-text-container {
         font-size: 2.5rem;
-    }
-
-    .unknown-card
-        > .card-text-container
-        > .fade-container
-        > .guess-buttons
-        > .guess-button {
-        font-size: 2.5rem;
-        margin: 1rem 0;
-        width: 10rem;
     }
 }

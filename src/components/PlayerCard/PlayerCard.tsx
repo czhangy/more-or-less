@@ -9,6 +9,8 @@ import { getTeamData } from "@/utils/team-map";
 import { useEffect, useState } from "react";
 // Next
 import Image from "next/image";
+// Components
+import GuessButtons from "@/components/GuessButtons/GuessButtons";
 
 type Props = {
     player: Player;
@@ -119,27 +121,10 @@ const PlayerCard: React.FC<Props> = ({
                             </strong>
                             <p className={styles["card-text"]}>AVERAGES</p>
                             <div className={styles["fade-container"]}>
-                                <div
-                                    className={`${styles["guess-buttons"]} ${
-                                        fadeButtons ? styles["fade-left"] : ""
-                                    }`}
-                                >
-                                    <button
-                                        className={styles["guess-button"]}
-                                        onClick={() => checkGuess(true)}
-                                        disabled={fadeButtons}
-                                    >
-                                        MORE
-                                    </button>
-                                    <p className={styles["card-text"]}>OR</p>
-                                    <button
-                                        className={styles["guess-button"]}
-                                        onClick={() => checkGuess(false)}
-                                        disabled={fadeButtons}
-                                    >
-                                        LESS
-                                    </button>
-                                </div>
+                                <GuessButtons
+                                    fade={fadeButtons}
+                                    onGuess={checkGuess}
+                                />
                                 <strong
                                     className={`${styles.answer} ${
                                         fadeButtons

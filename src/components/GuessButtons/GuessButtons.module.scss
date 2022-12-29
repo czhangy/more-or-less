@@ -1,0 +1,29 @@
+@use "@/styles/constants";
+
+.guess-buttons {
+    --button-margin: 0.5rem;
+    --button-radius: 5px;
+    --button-width: 6rem;
+    --fade-out-time: 0.2s;
+
+    align-items: center;
+    display: flex;
+    font-family: constants.$main-font;
+    flex-direction: column;
+    transition: opacity var(--fade-out-time), transform var(--fade-out-time);
+    transform: translateX(-(constants.$translate-dist));
+
+    .guess-button {
+        border-radius: var(--button-radius);
+        margin: var(--button-margin) 0;
+        width: var(--button-width);
+    }
+}
+
+// Desktop view
+@media screen and (min-width: constants.$desktop) {
+    .guess-buttons {
+        --button-margin: 1rem;
+        --button-width: 10rem;
+    }
+}

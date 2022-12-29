@@ -6,24 +6,18 @@
     flex-direction: column;
     height: 100%;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 1s, transform 1s;
 
     .welcome-text {
-        -webkit-animation: fadeInTop 1s;
-        animation: fadeInTop 1s;
         color: white;
         font-family: constants.$main-font;
         font-size: 1.5rem;
         margin-bottom: 2rem;
     }
 
-    .text-fade-out {
-        animation: fadeOutTop 1s;
-        -webkit-animation: fadeOutTop 1s;
-    }
-
     .start-button {
-        -webkit-animation: fadeInBottom 1s;
-        animation: fadeInBottom 1s;
         background: white;
         border: 2px solid white;
         border-radius: 100px;
@@ -31,60 +25,11 @@
         font-size: 1.5rem;
         padding: 1rem 3rem;
     }
-
-    .button-fade-out {
-        animation: fadeOutBottom 1s;
-        -webkit-animation: fadeOutBottom 1s;
-    }
 }
 
-// Animations
-@keyframes fadeInTop {
-    0% {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInBottom {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeOutTop {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-}
-
-@keyframes fadeOutBottom {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
+.show {
+    opacity: 1;
+    transform: translateY(0px);
 }
 
 // Sticky hover

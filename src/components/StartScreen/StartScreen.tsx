@@ -1,30 +1,40 @@
 // Stylesheet
 import styles from "./StartScreen.module.scss";
+// React
+import { useEffect, useState } from "react";
 
 type Props = {
     onStart: () => void;
 };
 
 const StartScreen: React.FC<Props> = ({ onStart }) => {
-    const onClick = () => {
-        document
-            .getElementById("welcome-text")!
-            .classList.add(styles["text-fade-out"]);
-        document
-            .getElementById("start-button")!
-            .classList.add(styles["button-fade-out"]);
+    // Page state
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+    // Trigger initial fade in
+    useEffect(() => {
+        setIsLoaded(true);
+    }, []);
+
+    // Handle start button press
+    const handleClick = () => {
+        setIsLoaded(false);
         setTimeout(() => onStart(), 900);
     };
 
     return (
-        <div className={styles["start-screen"]}>
+        <div
+            className={`${styles["start-screen"]} ${
+                isLoaded ? styles.show : ""
+            }`}
+        >
             <div id="welcome-text" className={styles["welcome-text"]}>
                 How well do you know NBA stats?
             </div>
             <button
                 id="start-button"
                 className={styles["start-button"]}
-                onClick={onClick}
+                onClick={handleClick}
             >
                 START!
             </button>
