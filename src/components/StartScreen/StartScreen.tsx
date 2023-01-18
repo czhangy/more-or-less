@@ -24,7 +24,7 @@ const StartScreen: React.FC<Props> = ({ onStart }) => {
 
     return (
         <div className={`trigger-screen ${isLoaded ? "show" : "hide"}`}>
-            <h3>Think you're a true NBA stathead?</h3>
+            <h3>Think you&apos;re a true NBA stathead?</h3>
             <button className="pill-button" onClick={handleClick}>
                 <div className="game-icon img">
                     <Image
