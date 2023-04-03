@@ -2,7 +2,7 @@
 
 <!-- Title -->
 
-<img src="assets/images/nba.png" alt="logo" width="200" height="auto" />
+<img src="assets/images/logo.png" alt="logo" width="200" height="auto" />
 <h1>More or Less</h1>
 
 <!-- Badges -->
