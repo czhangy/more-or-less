@@ -54,7 +54,7 @@
 
 More or less is a game based off of the popular web game Higher or Lower. Instead of guessing Google search frequency, players will guess current NBA player statistics.
 
-The most up-to-date version of More or Less is currently deployed at: [PROJECT_URL].
+The most up-to-date version of More or Less is currently deployed at: https://nba-more-or-less.vercel.app/.
 
 <!-- Tech Stack -->
 
